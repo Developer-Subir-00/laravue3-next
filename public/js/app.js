@@ -24136,6 +24136,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     showConfirmButton: false,
                     timer: 2000
                   });
+
+                  _this2.$router.push('/category');
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -24201,17 +24203,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     deleteCategory: function deleteCategory(id) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/category/".concat(id)).then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/category/".concat(id)).then(function () {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Category Updated Successfully',
+                    title: 'Category Deleted Successfully',
                     showConfirmButton: false,
                     timer: 2000
                   });
@@ -24220,14 +24221,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 2:
-                response = _context.sent;
-
-              case 3:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    published: function published(id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/published/".concat(id)).then(function () {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Category Published Successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    unPublished: function unPublished(id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/unpublished/".concat(id)).then(function () {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Category Unpublished Successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   },
@@ -24776,11 +24828,7 @@ var _hoisted_10 = {
     "width": "160px"
   }
 };
-var _hoisted_11 = {
-  key: 0,
-  href: "#",
-  "class": "text-info me-4"
-};
+var _hoisted_11 = ["onClick"];
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-arrow-up"
@@ -24789,11 +24837,7 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_13 = [_hoisted_12];
-var _hoisted_14 = {
-  key: 1,
-  href: "#",
-  "class": "text-warning me-4"
-};
+var _hoisted_14 = ["onClick"];
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "fas fa-arrow-down"
@@ -24843,16 +24887,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.category_description), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.publication_status == 1 ? 'Published' : 'Unpublished'), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.publication_status === 1 ? 'Published' : 'Unpublished'), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_10, [category.publication_status == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_11, _hoisted_13)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", _hoisted_14, _hoisted_16)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_10, [category.publication_status === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+      key: 0,
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $options.unPublished(category.id);
+      }, ["prevent"]),
+      "class": "btn btn-outline-primary btn-sm text-info me-4"
+    }, _hoisted_13, 8
+    /* PROPS */
+    , _hoisted_11)) : category.publication_status === 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+      key: 1,
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $options.published(category.id);
+      }, ["prevent"]),
+      "class": "btn btn-outline-primary btn-sm text-warning me-4"
+    }, _hoisted_16, 8
+    /* PROPS */
+    , _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: {
         name: 'edit-category',
         params: {
           id: category.id
         }
       },
-      "class": "text-success me-2"
+      "class": "btn btn-outline-primary btn-sm text-success me-2"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [_hoisted_17];
@@ -24866,7 +24926,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return $options.deleteCategory(category.id);
       }, ["prevent"]),
-      "class": "text-danger m-2"
+      "class": "btn btn-outline-primary btn-sm text-danger m-2"
     }, _hoisted_20, 8
     /* PROPS */
     , _hoisted_18)])]);

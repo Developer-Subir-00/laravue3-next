@@ -80,6 +80,7 @@ export default {
                         showConfirmButton: false,
                         timer: 2000
                     })
+                    this.$router.push('/category');
                 })
                 .catch(error=>{
                     console.log(error)

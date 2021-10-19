@@ -22,12 +22,12 @@
                                 <td>{{ category.id }}</td>
                                 <td>{{ category.category_name }}</td>
                                 <td>{{ category.category_description }}</td>
-                                <td>{{ category.publication_status == 1 ? 'Published' : 'Unpublished' }}</td>
+                                <td>{{ category.publication_status === 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td style="width: 160px">
-                                    <a href="#" class="text-info me-4" v-if="category.publication_status == 1"><i class="fas fa-arrow-up"></i></a>
-                                    <a href="#" class="text-warning me-4" v-else="category.publication_status == 0"><i class="fas fa-arrow-down"></i></a>
-                                    <router-link :to="{name: 'edit-category', params: {id: category.id}}" class="text-success me-2"><i class="fas fa-edit"></i></router-link>
-                                    <a @click.prevent="deleteCategory(category.id)" class="text-danger m-2"><i class="fas fa-trash-alt"></i></a>
+                                    <a @click.prevent="unPublished(category.id)" class="btn btn-outline-primary btn-sm text-info me-4" v-if="category.publication_status === 1"><i class="fas fa-arrow-up"></i></a>
+                                    <a @click.prevent="published(category.id)" class="btn btn-outline-primary btn-sm text-warning me-4" v-else-if="category.publication_status === 0"><i class="fas fa-arrow-down"></i></a>
+                                    <router-link :to="{name: 'edit-category', params: {id: category.id}}" class="btn btn-outline-primary btn-sm text-success me-2"><i class="fas fa-edit"></i></router-link>
+                                    <a @click.prevent="deleteCategory(category.id)" class="btn btn-outline-primary btn-sm text-danger m-2"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -55,12 +55,42 @@ export default {
             })
         },
         async deleteCategory (id) {
-            const response = await axios.delete(`/api/category/${id}`)
-                .then((response)=>{
+            await axios.delete(`/api/category/${id}`)
+                .then(()=>{
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Category Updated Successfully',
+                        title: 'Category Deleted Successfully',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+        },
+        async published (id) {
+            await axios.get(`/api/published/${id}`)
+                .then(()=>{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Category Published Successfully',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+        },
+        async unPublished (id) {
+            await axios.get(`/api/unpublished/${id}`)
+                .then(()=>{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Category Unpublished Successfully',
                         showConfirmButton: false,
                         timer: 2000
                     })
